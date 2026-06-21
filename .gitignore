@@ -2,6 +2,9 @@ node_modules/
 .expo/
 dist/
 .env
+.env.local
 .DS_Store
 android/
 ios/
+*.orig.*
+web-build/
