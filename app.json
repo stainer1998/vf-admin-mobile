@@ -36,8 +36,10 @@
         {
           "enableFTS": true
         }
-      ]
+      ],
+      "expo-asset"
     ],
+    "newArchEnabled": true,
     "experiments": {
       "typedRoutes": true
     }
