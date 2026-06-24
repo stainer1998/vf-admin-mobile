@@ -2,7 +2,7 @@ import { View, Text, ScrollView, TouchableOpacity, Alert, ActivityIndicator } fr
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useLocalSearchParams, router } from 'expo-router'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { ChevronLeft } from 'lucide-react-native'
+import { ChevronLeft, Pencil } from 'lucide-react-native'
 import { trabajosService } from '@/api/services/trabajos'
 import { colors } from '@/theme'
 import { formatDate, formatMoney } from '@/utils/format'
@@ -82,11 +82,14 @@ export default function TrabajoDetailScreen() {
           <Text className="text-white font-bold text-lg">{ot.number}</Text>
           <Text className="text-blue-200 text-xs">{ot.client_name}</Text>
         </View>
-        <View className="rounded-full px-3 py-1" style={{ backgroundColor: STATUS_COLOR[ot.work_status] + '30' }}>
+        <View className="rounded-full px-3 py-1 mr-2" style={{ backgroundColor: STATUS_COLOR[ot.work_status] + '30' }}>
           <Text className="text-xs font-semibold" style={{ color: STATUS_COLOR[ot.work_status] }}>
             {STATUS_OPTIONS.find(s => s.value === ot.work_status)?.label ?? ot.work_status}
           </Text>
         </View>
+        <TouchableOpacity onPress={() => router.push(`/trabajos/editar?id=${ot.id}`)}>
+          <Pencil size={18} color="#fff" />
+        </TouchableOpacity>
       </View>
 
       <ScrollView className="flex-1" contentContainerClassName="p-4 gap-4">

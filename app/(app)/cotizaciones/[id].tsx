@@ -2,7 +2,7 @@ import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator } from 'rea
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useLocalSearchParams, router } from 'expo-router'
 import { useQuery } from '@tanstack/react-query'
-import { ChevronLeft } from 'lucide-react-native'
+import { ChevronLeft, Pencil } from 'lucide-react-native'
 import { cotizacionesService } from '@/api/services/cotizaciones'
 import { colors } from '@/theme'
 import { formatDate, formatMoney } from '@/utils/format'
@@ -61,11 +61,16 @@ export default function CotizacionDetailScreen() {
           <Text className="text-white font-bold text-lg">{quote.folio}</Text>
           <Text className="text-blue-200 text-xs">{quote.client_name}</Text>
         </View>
-        <View className="rounded-full px-3 py-1" style={{ backgroundColor: STATUS_COLOR[quote.status] + '30' }}>
+        <View className="rounded-full px-3 py-1 mr-2" style={{ backgroundColor: STATUS_COLOR[quote.status] + '30' }}>
           <Text className="text-xs font-semibold" style={{ color: STATUS_COLOR[quote.status] }}>
             {STATUS_LABEL[quote.status] ?? quote.status}
           </Text>
         </View>
+        {quote.status === 'DRAFT' && (
+          <TouchableOpacity onPress={() => router.push(`/cotizaciones/editar?id=${quote.id}`)}>
+            <Pencil size={18} color="#fff" />
+          </TouchableOpacity>
+        )}
       </View>
 
       <ScrollView className="flex-1" contentContainerClassName="p-4 gap-4">
